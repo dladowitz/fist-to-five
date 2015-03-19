@@ -5,10 +5,10 @@
     %table.table.table-striped
       %tr
         %th.col-md-6 Subject
-        - if current_user.admin
-          %th.col-md-6 Understandings (admin)
+        - if current_user
+          %th.col-md-6 Understandings
       - @subjects.each do |subject|
         %tr
           %td= link_to subject.name, new_subject_understanding_path(subject)
-          - if current_user.admin
+          - if current_user
             %td= link_to "View", subject_path(subject)

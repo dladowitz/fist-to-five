@@ -24,11 +24,7 @@ class SubjectsController < ApplicationController
     @page_name = "Student Understanding"
     @subject = Subject.find params[:id]
     @understandings = @subject.understandings
-
-    unless current_user.admin
-      flash[:danger] = "This page is not for you. All your bases are belong to us"
-      redirect_to user_path(current_user)
-    end
+    @level_breakdown = @subject.breakdown
   end
 
   def edit

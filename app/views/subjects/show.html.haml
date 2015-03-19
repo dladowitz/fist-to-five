@@ -1,12 +1,37 @@
-%h1.m-b-lg= @subject.name
+.container
+  .row
+    %h1.m-b-lg= @subject.name
+    .col-md-9
+      %table.table.table-bordered
+        %tr
+          %th.col-md-3 Understanding Level
+          %th Zero
+          %th One
+          %th Two
+          %th Three
+          %th Four
+          %th Five
+        %tr
+          %td Number of Students
+          %td= @level_breakdown[0]
+          %td= @level_breakdown[1]
+          %td= @level_breakdown[2]
+          %td= @level_breakdown[3]
+          %td= @level_breakdown[4]
+          %td= @level_breakdown[5]
 
-.col-md-6
-  %table.table.table-striped
-    %tr
-      %th.col-md-6 Student
-      %th.col-md-6 Understanding Level
 
-    - @understandings.each do |understanding|
-      %tr
-        %td= understanding.user.first_name.capitalize
-        %td= understanding.level
+  - if current_user.admin
+    .row
+      %h3.red Admin View
+
+      .col-md-6
+        %table.table.table-striped
+          %tr
+            %th.col-md-6 Student
+            %th.col-md-6 Understanding Level
+
+          - @understandings.each do |understanding|
+            %tr
+              %td= understanding.user.first_name.capitalize
+              %td= understanding.level

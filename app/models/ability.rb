@@ -12,7 +12,7 @@ class Ability
     else
       can [:index, :new, :create],  User
 
-      can [:show], User do |user_record|
+      can [:show, :edit, :update], User do |user_record|
         current_user.id == user_record.id
       end
     end
