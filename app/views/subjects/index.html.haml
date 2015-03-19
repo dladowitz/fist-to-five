@@ -1,0 +1,14 @@
+= link_to "Create a new subject", new_subject_path, class: "btn btn-success btn-large"
+
+.m-t-lg
+  .col-md-6
+    %table.table.table-striped
+      %tr
+        %th.col-md-6 Subject
+        - if current_user.admin
+          %th.col-md-6 Understandings (admin)
+      - @subjects.each do |subject|
+        %tr
+          %td= link_to subject.name, new_subject_understanding_path(subject)
+          - if current_user.admin
+            %td= link_to "View", subject_path(subject)

@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:success] = "User account created successfully"
+      @understandings = @user.understandings
       redirect_to signin_path
     else
       render :new
@@ -27,6 +28,7 @@ class UsersController < ApplicationController
     @page_name = "Dashboard"
 
     if @user
+      @understandings = @user.understandings
       render :show
     else
       redirect_to root_path

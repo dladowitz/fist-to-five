@@ -1,0 +1,22 @@
+- if @already_answered
+  %h2
+    You've already rated you undertanding of
+    %span
+    %strong.green= @subject.name
+  %h3
+    Currently you can't change your rating. There is no going back. Lets hope you chose correctly.
+
+- else
+  %h2
+    From 0 to 5, what is your understanding of
+    %span
+      %strong.green= @subject.name
+
+  = form_for [@subject, @understanding] do |f|
+    .form-group
+      =f.label :level
+      =f.number_field :level
+
+    .form-group
+      = f.submit class: "btn btn-primary pull-left"
+

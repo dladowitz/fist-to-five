@@ -17,5 +17,8 @@ class User < ActiveRecord::Base
   validates :email,      presence: true, uniqueness: true
   validates :password,   presence: { on: create }, length: { minimum: 6 }, if: :password_digest_changed?
 
+  has_many :understandings
+  has_many :subjects
+
   has_secure_password
 end

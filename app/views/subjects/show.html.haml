@@ -1,0 +1,12 @@
+%h1.m-b-lg= @subject.name
+
+.col-md-6
+  %table.table.table-striped
+    %tr
+      %th.col-md-6 Student
+      %th.col-md-6 Understanding Level
+
+    - @understandings.each do |understanding|
+      %tr
+        %td= understanding.user.first_name.capitalize
+        %td= understanding.level

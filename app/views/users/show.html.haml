@@ -3,10 +3,22 @@
     .ibox.float-e-margins
       .ibox-title
         %h3
-          Here is what people you are following are saying
+          Your Reported Understandings
       .ibox-content
         .row
           .posts.m-t-lg
             .no-posts.m-l-lg
-              %h4= link_to "See all users", users_path
+              - if @understandings.any?
+                %table.table.table-striped
+                  %tr
+                    %th Subject
+                    %th Understanding
+                  - @understandings.each do |understanding|
+                    %tr
+                      %td= understanding.subject.name
+                      %td= understanding.level
+              - else
+                %h3
+                  You haven't rated your understaning of any subjects yes.
+                  = link_to "Lets go!", subjects_path
 
