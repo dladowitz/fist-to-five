@@ -1,7 +1,2 @@
-Let's clone Tumblr! Specifically, let's have a small blogging site that allows the following behavior: 
-* a user can register
-* a user can post a blog post (title & text is fine, but bonus points for attaching a picture). 
-* a user can view another user's detail page that lists their blog posts
-* a user can subscribe to a user. 
-* as a user when looking at my dashboard, I see the recent posts of everyone I'm following. 
-Please spend some time throwing together the above functionality and then please push it to github. Use rails with whatever gems you like. The front end can be super basic. This is more about the structure of the app. 
+It's pretty much like kindergarden around here all day long:
+https://www.teachingchannel.org/videos/getting-instant-student-feedback
