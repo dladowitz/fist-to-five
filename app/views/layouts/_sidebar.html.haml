@@ -3,9 +3,11 @@
     %ul#side-menu.nav
       %li.nav-header
         .dropdown.profile-element
+          %h2.white Fist to Five
           %span
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               %span.clear
+
                 %span.block.m-t-xs
                   %strong.font-bold
                     = link_to "#{current_user.first_name.capitalize}", "#{edit_user_path(current_user)}"

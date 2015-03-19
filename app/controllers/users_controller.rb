@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @page_name = "Find someone new to follow"
+    @page_name = "All Users"
   end
 
   def new
