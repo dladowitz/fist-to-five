@@ -3,12 +3,9 @@ class UsersController < ApplicationController
 
   def index
     @page_name = "Find someone new to follow"
-    @users = User.all
   end
 
   def new
-    @user = User.new
-
     render layout: "landing_page/landing_layout"
   end
 
@@ -37,14 +34,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    @page_name = @user.first_name.capitalize
   end
 
   def update
-    @user = current_user
     if @user.update_attributes user_params
       flash[:success] = "Updated account"
-      redirect_to user_path(@user)
+      redirect_to edit_user_path(@user)
     else
       render :edit
     end
@@ -53,6 +49,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :email, :admin, :password, :password_confirmation)
   end
 end

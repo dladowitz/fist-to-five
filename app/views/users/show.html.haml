@@ -15,12 +15,35 @@
                     %th Understanding
                   - @understandings.each do |understanding|
                     %tr
-                      %td= understanding.subject.name
+                      %td= link_to understanding.subject.name, subject_path(understanding.subject)
                       %td= understanding.level
               - else
                 %h3
                   You haven't rated your understanding of any subjects yes.
                   = link_to "Lets go!", subjects_path
+.row
+  .col-lg-8
+    .ibox.float-e-margins
+      .ibox-title
+        %h3
+          Subjects You Created
+      .ibox-content
+        .row
+          .posts.m-t-lg
+            .no-posts.m-l-lg
+              - if current_user.subjects.any?
+                %table.table.table-striped
+                  %tr
+                    %th Subject
+                    %th Answers
+                  - current_user.subjects.each do |subject|
+                    %tr
+                      %td= link_to subject.name, subject_path(subject)
+                      %td= subject.understandings.count
+              - else
+                %h3
+                  You haven't any subject yes.
+                  = link_to "Lets go!", new_subject_path
 
 .row
   = link_to "Update Account", edit_user_path(@user), class: "btn btn-primary"

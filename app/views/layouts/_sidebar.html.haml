@@ -8,7 +8,7 @@
               %span.clear
                 %span.block.m-t-xs
                   %strong.font-bold
-                    = link_to "#{current_user.first_name.capitalize}", "#{user_path(current_user)}"
+                    = link_to "#{current_user.first_name.capitalize}", "#{edit_user_path(current_user)}"
             %ul.dropdown-menu.animated.fadeInRight.m-t-xs
               %li
                 %a{:href => "login.html"} Logout
@@ -22,3 +22,8 @@
         %a{:href => "#{subjects_path}"}
           %i.fa.fa-graduation-cap.fa-2x
           %span.nav-label View Subjects
+      - if current_user.admin?
+        %li
+          %a{:href => "#{users_path}"}
+            %i.fa.fa-user.fa-2x
+            %span.nav-label All Users
