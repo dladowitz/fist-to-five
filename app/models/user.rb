@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def full_name
+    "#{first_name.capitalize if first_name} #{last_name.capitalize if last_name}"
+  end
+
   ### Class Methods
 
   # Not sure how Thread works here, but a guy on the interweb seems to thing its ok:

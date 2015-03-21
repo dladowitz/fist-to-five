@@ -11,7 +11,7 @@
 #
 
 class Understanding < ActiveRecord::Base
-  validates :user_id, :subject_id, :level, presence: true
+  validates :subject_id, :level, presence: true
   validates :level, :inclusion => 1..5
 
   belongs_to :user

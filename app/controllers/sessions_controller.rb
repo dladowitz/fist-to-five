@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       session[:id] = @user.id
 
       flash[:success] = "Welcome, #{@user.first_name}"
-      redirect_to user_path(@user)
+      redirect_to root_path
     else
       flash[:danger] = "Username and/or Password dont appear to be correct"
       redirect_to signin_path
@@ -25,6 +25,6 @@ class SessionsController < ApplicationController
       flash[:danger] = "Errr, you can't log out when you aren't logged in. That's science."
     end
 
-    redirect_to signin_path
+    redirect_to root_path
   end
 end

@@ -9,12 +9,12 @@ class UnderstandingsController < ApplicationController
   end
 
   def create
-    @user = current_user
+    @user = current_user || User.new
     @subject = Subject.find params[:subject_id]
-    @understanding = @user.understandings.build understanding_params.merge(subject_id: @subject.id)
+    @understanding = Understanding.new understanding_params.merge(subject_id: @subject.id, user_id: @user.id)
 
     if @understanding.save
-      redirect_to subject_understanding_path(@subject, @understanding)
+      redirect_to subject_path(@subject)
     else
       render :new
     end

@@ -21,7 +21,7 @@
           %td= @level_breakdown[5]
 
 
-  - if current_user.admin
+  - if current_user && current_user.admin
     .row
       %h3.red Admin View
 
@@ -33,5 +33,5 @@
 
           - @understandings.each do |understanding|
             %tr
-              %td= understanding.user.first_name.capitalize
+              %td= understanding.user ? understanding.user.full_name : "Guest"
               %td= understanding.level

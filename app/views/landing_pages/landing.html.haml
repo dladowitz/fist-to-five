@@ -16,22 +16,52 @@
             %ul#navigation.nav.navbar-nav.navbar-right
               %li.active
                 %a.current{:href => "#header"} Home
-              %li
-                %a.external{href: "/signup"} Sign Up
-              %li
-                %a.external{href: "/signin"} Sign In
-    %main#main.site-main
-      %section.section.section-center.section-cta
-        .container
-          %h1.section-title
-            %span Welcome to Fist to Five
-          %h2
-            Lets Learn
+              - if current_user
+                %li
+                  = link_to "Sign Out", session_path(current_user), class: "external", method: :delete
+                %li
+                  = link_to "Dashboard", user_path(current_user), class: "external"
+                %li
+                  %h4.ml20
+                    Hello
+                    = current_user.first_name.capitalize
+              -else
+                %li
+                  %a.external{href: "/signup"} Sign Up
+                %li
+                  %a.external{href: "/signin"} Sign In
+                %li
+                  %h4.ml20
+                    Hello Guest
+    %main#main.site-main.pt50
       %section#carousel-1.carousel.slide.section-slide{"data-ride" => "carousel"}
         .carousel-inner
           .item.active{:style => "background: url(assets/background/dusty_wide_dark_2.jpg);"}
             .container
-              %div{style:"height: 350px; width: 100px"}
+              .main_content.pt10.pb40.col-sm-8.col-sm-offset-2
+                %h1.section-title
+                  %span Welcome to Fist to Five
+                %h2
+                  Latest Subject:
+                %h3
+                  How well do you understand
+                  %span.green
+                    = @subject.name
+                  ?
+
+                = form_for [@subject, @understanding], html: {class: "form-inline"} do |f|
+                  .form-group
+                    =f.number_field :level, placeholder: "0-5", max: "5", min: "0", class:"form-control input-lg width100"
+
+                  = f.submit "Save", class: "btn btn-primary d-btn-lg ml10"
+
+                  - unless current_user
+                    %h5.mt40
+                      = link_to "Sign in to save your answers", new_session_path, class: "blue"
+
+      %section.section.section-center.section-cta.pt10.pb20
+        .container
+          .div{style:"height:20px"}
 
     %footer#footer.site-footer
       .container

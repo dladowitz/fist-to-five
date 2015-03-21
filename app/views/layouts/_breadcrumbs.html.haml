@@ -2,7 +2,13 @@
   .col-lg-10
     %h2= @page_name
   %ul.nav.navbar-top-links.navbar-right
-    %li
-      = link_to session_path(current_user), method: :delete do
-        Sign Out
-        %i.fa.fa-sign-out
+    - if current_user
+      %li
+        = link_to session_path(current_user), method: :delete do
+          Sign Out
+          %i.fa.fa-sign-out
+    -else
+      %li
+        = link_to new_session_path do
+          Sign In
+          %i.fa.fa-sign-out
