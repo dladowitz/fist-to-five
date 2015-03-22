@@ -3,6 +3,8 @@
     %header#header.site-header
       %nav#navbar.site-navbar.navbar.navbar-static-top{:role => "navigation"}
         .container
+
+          -#TODO: Move Header to Partial
           .navbar-header
             %button.navbar-toggle{"data-target" => "#navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
               %span.sr-only Toggle navigation
@@ -11,7 +13,6 @@
               = image_tag "beta.png", class: "beta"
               %a{:style => "font-size: 35px", :href => "#"}
                 Fist to Five
-
           #navbar-collapse-1.collapse.navbar-collapse
             %ul#navigation.nav.navbar-nav.navbar-right
               %li.active
@@ -21,6 +22,8 @@
                   = link_to "Sign Out", session_path(current_user), class: "external", method: :delete
                 %li
                   = link_to "Dashboard", user_path(current_user), class: "external"
+                %li
+                  = link_to "New Subject", new_subject_path, class: "external"
                 %li
                   %h4.ml20
                     Hello
@@ -33,7 +36,7 @@
                 %li
                   %h4.ml20
                     Hello Guest
-    %main#main.site-main.pt50
+    %main#main.site-main
       %section#carousel-1.carousel.slide.section-slide{"data-ride" => "carousel"}
         .carousel-inner
           .item.active{:style => "background: url(assets/background/dusty_wide_dark_2.jpg);"}
@@ -42,22 +45,20 @@
                 %h1.section-title
                   %span Welcome to Fist to Five
                 %h2
-                  Latest Subject:
-                %h3
-                  How well do you understand
-                  %span.green
-                    = @subject.name
-                  ?
+                  How well do you understand:
 
-                = form_for [@subject, @understanding], html: {class: "form-inline"} do |f|
-                  .form-group
-                    =f.number_field :level, placeholder: "0-5", max: "5", min: "0", class:"form-control input-lg width100"
+                %h3.green #{@subject.name}?
 
-                  = f.submit "Save", class: "btn btn-primary d-btn-lg ml10"
-
-                  - unless current_user
-                    %h5.mt40
-                      = link_to "Sign in to save your answers", new_session_path, class: "blue"
+                - if current_user && current_user.already_answered?(@subject)
+                  %h3
+                    You said your understanding was
+                    -#TODO Clean this image tag up with a decorator
+                    = image_tag "fingers/fingers1-#{current_user.understanding_of(@subject)}.jpg", class: "fist"
+                - else
+                  .fist-container
+                    - 0.upto(5).each do |index|
+                      = link_to "/subjects/#{@subject.id}/understandings?id=#{index}", method: :post do
+                        = image_tag "fingers/fingers1-#{index}.jpg", class: "fist"
 
       %section.section.section-center.section-cta.pt10.pb20
         .container

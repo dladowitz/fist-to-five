@@ -1,17 +1,17 @@
 class UnderstandingsController < ApplicationController
   def new
     @page_name = "Understanding"
-    @user = current_user
+    @user = current_user || User.new
     @subject = Subject.find params[:subject_id]
     @understanding = Understanding.new
 
-    @already_answered = already_answered?
+    @already_answered = @user.already_answered?(@subject)
   end
 
   def create
     @user = current_user || User.new
     @subject = Subject.find params[:subject_id]
-    @understanding = Understanding.new understanding_params.merge(subject_id: @subject.id, user_id: @user.id)
+    @understanding = Understanding.new subject_id: @subject.id, user_id: @user.id, level: params[:id]
 
     if @understanding.save
       redirect_to subject_path(@subject)
@@ -29,9 +29,5 @@ class UnderstandingsController < ApplicationController
 
   def understanding_params
     params.require(:understanding).permit(:level, :subject_id)
-  end
-
-  def already_answered?
-    @user.understandings.where(subject_id: @subject.id).any?
   end
 end

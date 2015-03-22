@@ -3,7 +3,8 @@
     %ul#side-menu.nav
       %li.nav-header
         .dropdown.profile-element
-          %h2.white Fist to Five
+          %h2
+            = link_to "Fist to Five", root_path
           %span
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               %span.clear
@@ -24,6 +25,10 @@
           %i.fa.fa-graduation-cap.fa-2x
           %span.nav-label View Subjects
       - if current_user
+        %li
+          %a{:href => "#{new_subject_path}"}
+            %i.fa.fa-university.fa-2x
+            %span.nav-label Create Subject
         %li
           %a{:href => "#{user_path(current_user)}"}
             %i.fa.fa-dashboard.fa-2x

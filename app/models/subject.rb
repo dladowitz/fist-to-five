@@ -18,7 +18,7 @@ class Subject < ActiveRecord::Base
     levels = {0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0}
 
     self.understandings.each do |understanding|
-      levels[understanding.level] =+ 1
+      levels[understanding.level] += 1
     end
 
     return levels

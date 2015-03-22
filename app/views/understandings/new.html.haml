@@ -1,24 +1,41 @@
 = render "layouts/validation_errors", :model => @understanding
 
-- if @already_answered
-  %h2
-    You've already rated you undertanding of
-    %span
-    %strong.green= @subject.name
-  %h3
-    Currently you can't change your rating. There is no going back. Lets hope you chose correctly.
+-#- if @already_answered
+-#  %h2
+-#    You've already rated you undertanding of
+-#    %span
+-#    %strong.green= @subject.name
+-#  %h3
+-#    Currently you can't change your rating. There is no going back. Lets hope you chose correctly.
+-#
+-#- else
+-#  %h2
+-#    From 0 to 5, what is your understanding of
+-#    %span
+-#      %strong.green= @subject.name
+-#
+-#  = form_for [@subject, @understanding] do |f|
+-#    .form-group
+-#      =f.label :level
+-#      =f.number_field :level
+-#
+-#    .form-group
+-#      = f.submit class: "btn btn-primary pull-left"
+-#
 
-- else
-  %h2
-    From 0 to 5, what is your understanding of
-    %span
-      %strong.green= @subject.name
+.col-sm-6.col-sm-offset-3
+  %h1
+    How well do you understand:
 
-  = form_for [@subject, @understanding] do |f|
-    .form-group
-      =f.label :level
-      =f.number_field :level
+  %h2.green #{@subject.name}?
 
-    .form-group
-      = f.submit class: "btn btn-primary pull-left"
-
+  - if current_user && current_user.already_answered?(@subject)
+    %h3
+      You said your understanding was
+      -#TODO Clean this image tag up with a decorator
+      = image_tag "fingers/fingers1-#{current_user.understanding_of(@subject)}.jpg", class: "fist"
+  - else
+    .fist-container
+      - 0.upto(5).each do |index|
+        = link_to "/subjects/#{@subject.id}/understandings?id=#{index}", method: :post do
+          = image_tag "fingers/fingers1-#{index}.jpg", class: "fist"
