@@ -11,11 +11,14 @@ class SubjectsController < ApplicationController
 
   def create
     @user = current_user
-    @subject = current_user.subjects.build subject_params
+    if @user
+      @subject = current_user.subjects.build subject_params
+    end
 
     if @subject.save
       redirect_to root_path
     else
+      flash[:danger] = "Something went really wrong. We blame ourselves for this injustice."
       render :new
     end
   end
