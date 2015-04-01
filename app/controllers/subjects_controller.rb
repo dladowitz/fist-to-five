@@ -14,7 +14,7 @@ class SubjectsController < ApplicationController
     @subject = current_user.subjects.build subject_params
 
     if @subject.save
-      redirect_to subjects_path
+      redirect_to root_path
     else
       render :new
     end

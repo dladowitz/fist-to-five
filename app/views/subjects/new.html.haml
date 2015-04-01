@@ -1,9 +1,13 @@
 = render "layouts/validation_errors", :model => @subject
 
-= form_for @subject do |f|
-  .form-group
-    =f.label :name
-    =f.text_field :name
+- if current_user
+  = form_for @subject do |f|
+    .form-group
+      =f.label :name
+      =f.text_field :name
 
-  .form-group
-    = f.submit class: "btn btn-primary pull-left"
+    .form-group
+      = f.submit class: "btn btn-primary pull-left"
+- else
+  %h1 Only users can create new subjects because....things.
+  = link_to "Sign In Now", new_session_path, class: "btn btn-primary"
